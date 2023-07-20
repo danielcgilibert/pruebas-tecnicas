@@ -1,7 +1,7 @@
-name: "Pull Request Labeler"
+name: 'Pull Request Labeler'
 on:
-- pull_request_target
-- workflow_dispatch
+  - pull_request_target
+  - workflow_dispatch
 
 jobs:
   triage:
@@ -10,4 +10,9 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v4
+      - uses: actions/labeler@v4
+      - id: run-frontend-tests
+      if: contains(steps.pruebas.outputs.all-labels, 'nombre etiqueta')
+      run: |
+        echo "Running frontend tests..."
+        # Put your commands for running frontend tests here
